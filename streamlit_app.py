@@ -43,7 +43,7 @@ for element in list_non_num:
     
 
 st.sidebar.title("CO2 Emissions Predictor")
-page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions", "Explainability", "MLflow Runs", "Pycaret"])
+page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions", "Explainability", "MLflow Runs", "PyCaret"])
 
 if page == "Introduction":
     st.title("CO2 Emissions Predictor")
@@ -243,7 +243,7 @@ elif page == "MLflow Runs":
     st.markdown(
         "View detailed runs on DagsHub: [oliviaosterlund/finalprojectapp MLflow](https://dagshub.com/oliviaosterlund/finalprojectapp.mlflow)"
     )
-elif page == "Pycaret":
+elif page == "PyCaret":
     st.subheader("PyCaret Regression")
     target = st.sidebar.selectbox("Select a target variable",df2.columns)
     features = st.multiselect("Select features",[c for c in df2.columns if c != target],default=[c for c in df2.columns if c != target] )

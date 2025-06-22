@@ -239,7 +239,7 @@ elif page == "Explainability":
 
     # SHAP Beeswarm Plot
     st.markdown("### SHAP Beeswarm Plot (Global Feature Importance)")
-    shap.plots.beeswarm(shap_values, show=False)
+    shap.summary_plot(shap_values.values, X_shap, plot_type="dot", show=False)
     st.pyplot(plt.gcf())
 
 

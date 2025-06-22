@@ -33,6 +33,7 @@ st.set_page_config(
 
 df = pd.read_csv("CO2_Emissions_Canada.csv")
 
+df_numeric = df.select_dtypes(include=np.number)
 
 df2 = df.dropna()
 le = LabelEncoder()
@@ -67,8 +68,6 @@ if page == "Introduction":
 
 elif page == "Data Visualization":
     st.subheader("Data Viz")
-
-    df_numeric = df.select_dtypes(include=np.number)
 
     tab1, tab2, tab3 = st.tabs(["Histogram", "Scatter Plot", "Correlation Heatmap"])
     with tab1:
@@ -178,7 +177,7 @@ elif page == "Predictions":
 elif page == "Explainability":
     st.subheader("Explainability")
     # Load dataset
-    X_shap, y_shap = df2.drop(columns=["CO2 Emissions(g/km)"]), df2["CO2 Emissions(g/km)"]
+    X_shap, y_shap = df_numeric.drop(columns=["CO2 Emissions(g/km)"]), df_numeric["CO2 Emissions(g/km)"]
     # Train default XGBoost model for explainability
     model_exp = XGBRegressor(objective='reg:squarederror', n_estimators=100, random_state=42)
     model_exp.fit(X_shap, y_shap)

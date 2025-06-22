@@ -245,6 +245,11 @@ elif page == "MLflow Runs":
     )
 elif page == "PyCaret":
     st.subheader("PyCaret Regression")
+    from pycaret.classification import setup as cls_setup, compare_models as cls_compare, finalize_model as cls_finalize, predict_model as cls_predict, pull as cls_pull
+    from pycaret.regression import setup as reg_setup, compare_models as reg_compare, finalize_model as reg_finalize, predict_model as reg_predict, pull as reg_pull
+
+    from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, r2_score, mean_absolute_error
+
     target = st.sidebar.selectbox("Select a target variable",df2.columns)
     features = st.multiselect("Select features",[c for c in df2.columns if c != target],default=[c for c in df2.columns if c != target] )
 

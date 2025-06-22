@@ -9,4 +9,4 @@ streamlit-pandas-profiling
 mlflow
 shap
 dagshub
-pycaretstreamlit
+pycaret

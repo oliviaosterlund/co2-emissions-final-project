@@ -100,7 +100,7 @@ if page == "Introduction":
 elif page == "Data Visualization":
     st.subheader("Data Viz")
 
-    tab1, tab2, tab3 = st.tabs(["Histogram", "Scatter Plot", "Correlation Heatmap"])
+    tab1, tab2, tab3, tab4 = st.tabs(["Histogram", "Scatter Plot", "Correlation Heatmap"])
     with tab1:
         st.subheader("Histogram")
         fig1, ax1 = plt.subplots()
@@ -115,6 +115,15 @@ elif page == "Data Visualization":
         sns.scatterplot(data=df, x=col_x, y="CO2 Emissions(g/km)", ax=ax2)
         ax2.set_title(f'{col_x} vs. CO2 Emissions')
         st.pyplot(fig2)
+    with tab3:
+        st.subheader("Bar Chart")
+        cat_col = st.selectbox("Select a X-axis variable",["Make", "Model","Vehicle Class","Transmission","Fuel Type"])
+        avg_emissions = df.groupby(cat_col)["CO2 Emissions(g/km)"].mean().sort_values(ascending=False)
+        fig4, ax4 = plt.subplots()
+        sns.barplot(x=avg_emissions.values, y=avg_emissions.index, ax=ax4, palette="mako")
+        ax4.set_xlabel("Average CO2 Emissions (g/km)")
+        ax4.set_title(f"Average CO2 Emissions by {cat_col}")
+        st.pyplot(fig4)
     with tab3:
         st.subheader("Correlation Matrix")
         fig_corr, ax_corr = plt.subplots(figsize=(18,14))

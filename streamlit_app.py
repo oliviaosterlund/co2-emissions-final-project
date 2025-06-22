@@ -234,7 +234,7 @@ elif page == "Explainability":
 
     # SHAP Waterfall Plot for first prediction
     st.markdown("### SHAP Waterfall Plot for First Prediction")
-    shap.plots.waterfall(shap_values[0], show=False)
+    shap.plots.waterfall(shap_values[42], show=False)
     st.pyplot(plt.gcf())
 
 

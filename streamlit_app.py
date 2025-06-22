@@ -43,7 +43,7 @@ for element in list_non_num:
     
 
 st.sidebar.title("CO2 Emissions Predictor")
-page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions", "Explainability", "MLFlow Runs"])
+page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions", "Explainability", "MLflow Runs"])
 
 if page == "Introduction":
     st.title("CO2 Emissions Predictor")

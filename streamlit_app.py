@@ -216,9 +216,9 @@ elif page == "Predictions":
     ax.scatter(y_test,predictions,alpha=0.5)
     ax.plot([y_test.min(),y_test.max()],
            [y_test.min(),y_test.max() ],"--r",linewidth=2)
-    ax.set_xlabel("Actual")
-    ax.set_ylabel("Predicted")
-    ax.set_title("Actual vs Predicted")
+    ax.set_xlabel("Actual CO2 Emissions")
+    ax.set_ylabel("Predicted CO2 Emissions")
+    ax.set_title("Actual vs Predicted CO2 Emissions")
     st.pyplot(fig)
 elif page == "Explainability":
     st.subheader("Explainability")

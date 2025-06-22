@@ -41,24 +41,12 @@ if page == "Introduction":
     st.markdown("""
     #### What this app does:
     - *Analyzes* key features
-    - *Visualizes* trends and provides actionable insights
+    - *Visualizes* trends and provides actionable insights into what features are the most impactful
     - *Predicts* CO2 emissions using a variety of regression models
     """)
     st.image("co2car.jpg", width=500)
 
     st.markdown("#### The Dataset")
-    st.markdown("""
-    This dataset was collected to study the relationship between *student lifestyle and academic habits on performance outcomes (exam scores)*. It includes variables such as:
-    - 📚 Class attendance and time studying
-    - 🧠 Mental health
-    - 💤 Sleep habits
-    - 🍎 Diet
-    - 🏃‍♂️ Exercise/physical activity 
-    - 👩‍💻 Social media and netflix usage 
-                
-    The goal is to leverage these factors to *predict the academic success* in students and better understand
-    which variables are most impactful.
-    """)
     
     st.markdown("##### Data Preview")
     rows = st.slider("Select a number of rows to display",5,20,5)
@@ -73,39 +61,27 @@ elif page == "Data Visualization":
 
     df_numeric = df.select_dtypes(include=np.number)
 
-    tab1, tab2, tab3 = st.tabs(["Scatter Plot","Box Plot", "Correlation Heatmap"])
+    tab1, tab2, tab3 = st.tabs(["Histogram Plot", "Scatter Plot", "Correlation Heatmap"])
     with tab1:
-        st.subheader("Scatter Plot")
-        fig_bar, ax_bar = plt.subplots(figsize=(12,6))
-        x_col = st.selectbox("Select x-axis variable", df_numeric.columns.drop(["exam_score","age", "exercise_frequency", "mental_health_rating"]))
-        sns.scatterplot(df, x = x_col, y = "exam_score")
-        st.pyplot(fig_bar)
+        st.subheader("Histogram Plot")
+        sns.histplot(df, x='CO2 Emissions(g/km)', binwidth=14)
+        plt.title("Distribution of CO2 Emissions")
+        plt.ylabel('Frequency')
     with tab2:
-        st.subheader("Box Plot")
-        fig_bar, ax_bar = plt.subplots(figsize=(12,6))
-        x_col_2 = st.selectbox("Select x-axis variable", options=["exercise_frequency", "diet_quality", "mental_health_rating"])
-        df_plot = df.copy()
-        if x_col_2 == "diet_quality":
-            df_plot['diet_quality'] = pd.Categorical(df_plot['diet_quality'], categories=['Poor', 'Fair', 'Good'], ordered=True)
-            order = ['Poor', 'Fair', 'Good']
-        else:
-            order = None
-        sns.boxplot(data=df_plot, x = x_col_2, y = "exam_score", order = order)
-        st.pyplot(fig_bar)
+        st.subheader("Scatter Plot")
+        sns.scatterplot(data = df, x = "Engine Size(L)", y = "CO2 Emissions(g/km)")
+        plt.title('Engine Size vs. CO2 Emissions')
     with tab3:
         st.subheader("Correlation Matrix")
-
         fig_corr, ax_corr = plt.subplots(figsize=(18,14))
-        
         sns.heatmap(df_numeric.corr(),annot=True,fmt=".2f",cmap='coolwarm')
-        
         st.pyplot(fig_corr)
 
 elif page == "Automated Report":
     st.subheader("Automated Report")
     if st.button("Generate Report"):
         with st.spinner("Generating report..."):
-            profile = ProfileReport(df,title="Student Habits vs Student Performance",explorative=True,minimal=True)
+            profile = ProfileReport(df,title="CO2 Emissions",explorative=True,minimal=True)
             st_profile_report(profile)
         export = profile.to_html()
         st.download_button(label="📥 Download full Report",data=export,file_name="student_habits_performance.html",mime='text/html')
@@ -113,14 +89,13 @@ elif page == "Automated Report":
 elif page == "Predictions":
     st.subheader("Predictions")
 
-    df2 = df.drop(["student_id","gender", "age", "parental_education_level", "internet_quality"], axis = 1)
-    df2['diet_quality'] = df2['diet_quality'].map({'Poor': 0, 'Fair': 1, 'Good': 2})
+    df2 = df.dropna()
     le = LabelEncoder()
-    list_non_num =["part_time_job","extracurricular_participation"]
+    list_non_num =["Make", "Model", "Vehicle Class", "Transmission", "Fuel Type"]
     for element in list_non_num:
         df2[element]= le.fit_transform(df2[element])
     
-    list_var = list(df2.columns.drop("exam_score"))
+    list_var = list(df2.columns.drop("CO2 Emissions(g/km)"))
     features_selection = st.sidebar.multiselect("Select Features (X)",list_var,default=list_var)
     if not features_selection:
         st.warning("Please select at least one feature")
@@ -145,7 +120,7 @@ elif page == "Predictions":
 
     
     X = df2[features_selection]
-    y = df2["exam_score"]
+    y = df2["CO2 Emissions(g/km)"]
 
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2, random_state = 42)
 
@@ -189,6 +164,6 @@ elif page == "Predictions":
     ax.plot([y_test.min(),y_test.max()],
            [y_test.min(),y_test.max() ],"--r",linewidth=2)
     ax.set_xlabel("Actual Exam Scores")
-    ax.set_ylabel("Predicted Exam Scores")
-    ax.set_title("Actual vs Predicted Exam Scores")
+    ax.set_ylabel("Predicted")
+    ax.set_title("Actual")
     st.pyplot(fig)

@@ -31,7 +31,7 @@ st.set_page_config(
     page_icon="🚙",
 )
 
-df = pd.read_csv("CO2_Emission_Canada.csv")
+df = pd.read_csv("CO2_Emissions_Canada.csv")
 st.sidebar.title("CO2 Emissions Predictor")
 page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions"])
 

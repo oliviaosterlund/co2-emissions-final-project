@@ -26,25 +26,25 @@ from xgboost import XGBRegressor
 from sklearn import metrics
 
 st.set_page_config(
-    page_title="Student Habits vs Performance",
+    page_title="CO2 Emissions Predictor",
     layout="centered",
-    page_icon="🍏",
+    page_icon="🚙",
 )
 
-df = pd.read_csv("student_habits_performance.csv")
-st.sidebar.title("Student Habits vs Student Performance")
+df = pd.read_csv("CO2_Emission_Canada.csv")
+st.sidebar.title("CO2 Emissions Predictor")
 page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions"])
 
 if page == "Introduction":
-    st.title("Student Performance Predictor")
-    st.subheader("Analyzing the effects of student habits on academic performance")
+    st.title("CO2 Emissions Predictor")
+    st.subheader("Analyzing the features of vehicles on CO2 emissions")
     st.markdown("""
     #### What this app does:
-    - *Analyzes* key lifestyle, academic, and personal factors
+    - *Analyzes* key features
     - *Visualizes* trends and provides actionable insights
-    - *Predicts* student academic performance (exam sores) using a regression model
+    - *Predicts* CO2 emissions using a variety of regression models
     """)
-    st.image("dataset-card.png", width=500)
+    st.image("co2car.jpg", width=500)
 
     st.markdown("#### The Dataset")
     st.markdown("""

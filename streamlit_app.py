@@ -100,7 +100,7 @@ if page == "Introduction":
 elif page == "Data Visualization":
     st.subheader("Data Viz")
 
-    tab1, tab2, tab3, tab4 = st.tabs(["Histogram", "Scatter Plot", "Correlation Heatmap"])
+    tab1, tab2, tab3, tab4 = st.tabs(["Histogram", "Scatter Plot", "Bar Chart", "Correlation Heatmap"])
     with tab1:
         st.subheader("Histogram")
         fig1, ax1 = plt.subplots()

@@ -233,15 +233,16 @@ elif page == "Explainability":
     shap_values = explainer(X_shap)
 
     # SHAP Waterfall Plot for first prediction
-    st.markdown("### SHAP Waterfall Plot for First Prediction")
+    st.markdown("### SHAP Waterfall Plot")
     shap.plots.waterfall(shap_values[42], show=False)
     st.pyplot(plt.gcf())
 
-
-    # SHAP Scatter Plot for 'Latitude'
-    st.markdown("### SHAP Scatter Plot for 'Engine Size(L)'")
-    shap.plots.scatter(shap_values[:, "Engine Size(L)"], color=shap_values, show=False)
+    # SHAP Beeswarm Plot
+    st.markdown("### SHAP Beeswarm Plot (Global Feature Importance)")
+    shap.plots.beeswarm(shap_values, show=False)
     st.pyplot(plt.gcf())
+
+
 elif page == "MLflow Runs":
     st.subheader("MLflow Runs")
     runs = mlflow.search_runs(order_by=["start_time desc"])

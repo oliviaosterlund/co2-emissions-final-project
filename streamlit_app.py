@@ -32,8 +32,17 @@ st.set_page_config(
 )
 
 df = pd.read_csv("CO2_Emissions_Canada.csv")
+
+
+df2 = df.dropna()
+    le = LabelEncoder()
+    list_non_num =["Make", "Model", "Vehicle Class", "Transmission", "Fuel Type"]
+    for element in list_non_num:
+        df2[element]= le.fit_transform(df2[element])
+    
+
 st.sidebar.title("CO2 Emissions Predictor")
-page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions"])
+page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions", "Explainability"])
 
 if page == "Introduction":
     st.title("CO2 Emissions Predictor")
@@ -94,12 +103,6 @@ elif page == "Automated Report":
 elif page == "Predictions":
     st.subheader("Predictions")
 
-    df2 = df.dropna()
-    le = LabelEncoder()
-    list_non_num =["Make", "Model", "Vehicle Class", "Transmission", "Fuel Type"]
-    for element in list_non_num:
-        df2[element]= le.fit_transform(df2[element])
-    
     list_var = list(df2.columns.drop("CO2 Emissions(g/km)"))
     features_selection = st.sidebar.multiselect("Select Features (X)",list_var,default=list_var)
     if not features_selection:
@@ -172,3 +175,25 @@ elif page == "Predictions":
     ax.set_ylabel("Predicted")
     ax.set_title("Actual vs Predicted")
     st.pyplot(fig)
+elif page == "Explainability":
+    st.subheader("Explainability")
+    # Load dataset
+    X_shap, y_shap = df2.drop(columns=["CO2 Emissions(g/km)"]), df2["CO2 Emissions(g/km)"]
+    # Train default XGBoost model for explainability
+    model_exp = XGBRegressor(objective='reg:squarederror', n_estimators=100, random_state=42)
+    model_exp.fit(X_shap, y_shap)
+
+    # Create SHAP explainer and values
+    explainer = shap.Explainer(model_exp)
+    shap_values = explainer(X_shap)
+
+    # SHAP Waterfall Plot for first prediction
+    st.markdown("### SHAP Waterfall Plot for First Prediction")
+    shap.plots.waterfall(shap_values[0], show=False)
+    st.pyplot(plt.gcf())
+
+
+    # SHAP Scatter Plot for 'Latitude'
+    st.markdown("### SHAP Scatter Plot for 'Engine Size(L)'")
+    shap.plots.scatter(shap_values[:, "Engine Size(L)"], color=shap_values, show=False)
+    st.pyplot(plt.gcf())

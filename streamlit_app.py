@@ -107,12 +107,11 @@ elif page == "Data Visualization":
     st.subheader("Data Viz")
 
     diverging_cmap = sns.diverging_palette(
-    h_neg=197,     # approximate hue for DeepSkyBlue
-    h_pos=328,     # approximate hue for DeepPink
-    s=75,
-    l=50,
+    h_neg=197,  # DeepSkyBlue hue angle
+    h_pos=328,  # DeepPink hue angle
+    s=75, l=50,  # saturation and lightness
     as_cmap=True
-    )    
+    )
 
     tab1, tab2, tab3, tab4 = st.tabs(["Histogram", "Scatter Plot", "Bar Chart", "Correlation Heatmap"])
     with tab1:
@@ -141,7 +140,7 @@ elif page == "Data Visualization":
     with tab4:
         st.subheader("Correlation Matrix")
         fig_corr, ax_corr = plt.subplots(figsize=(18,14))
-        sns.heatmap(df_numeric.corr(),annot=True,fmt=".2f",cmap='diverging_cmap')
+        sns.heatmap(df_numeric.corr(),annot=True,fmt=".2f",cmap=diverging_cmap)
         st.pyplot(fig_corr)
 
 elif page == "Automated Report":

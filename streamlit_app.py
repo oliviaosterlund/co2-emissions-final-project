@@ -235,9 +235,8 @@ elif page == "Explainability":
     tab1, tab2 = st.tabs(["Waterfall Plot", "Beeswarm Plot"])
     with tab1:
         # SHAP Waterfall Plot for first prediction
-        idx = st.slider("Select prediction index for Waterfall plot", 0, 42, 0)
-        st.markdown(f"### SHAP Waterfall Plot for the {idx} Prediction")
-        shap.plots.waterfall(shap_values[idx], show=False)
+        st.markdown(f"### SHAP Waterfall Plot for an Individual Prediction (Local Feature Importance)")
+        shap.plots.waterfall(shap_values[18], show=False)
         st.pyplot(plt.gcf())
         plt.clf()
     with tab2:

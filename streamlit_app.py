@@ -35,10 +35,10 @@ df = pd.read_csv("CO2_Emissions_Canada.csv")
 
 
 df2 = df.dropna()
-    le = LabelEncoder()
-    list_non_num =["Make", "Model", "Vehicle Class", "Transmission", "Fuel Type"]
-    for element in list_non_num:
-        df2[element]= le.fit_transform(df2[element])
+le = LabelEncoder()
+list_non_num =["Make", "Model", "Vehicle Class", "Transmission", "Fuel Type"]
+for element in list_non_num:
+    df2[element]= le.fit_transform(df2[element])
     
 
 st.sidebar.title("CO2 Emissions Predictor")

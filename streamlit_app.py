@@ -257,7 +257,7 @@ elif page == "MLflow Runs":
 elif page == "PyCaret":
     st.subheader("PyCaret Regression")
 
-    df3 = df2.sample(1000)
+    df3 = df2.sample(n=1000)
     target = st.sidebar.selectbox("Select a target variable",df3.columns)
     features = st.multiselect("Select features",[c for c in df3.columns if c != target],default=[c for c in df3.columns if c != target] )
 

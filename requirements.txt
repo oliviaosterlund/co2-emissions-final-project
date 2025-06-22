@@ -11,3 +11,4 @@ shap
 dagshub
 imbalanced-learn==0.13.0 
 pycaret==3.3.2
+xgboost

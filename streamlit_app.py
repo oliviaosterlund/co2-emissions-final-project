@@ -110,7 +110,7 @@ elif page == "Data Visualization":
     with tab1:
         st.subheader("Histogram")
         fig1, ax1 = plt.subplots()
-        sns.histplot(df, x='CO2 Emissions(g/km)', binwidth=14, ax=ax1, color='cyan')
+        sns.histplot(df, x='CO2 Emissions(g/km)', binwidth=14, ax=ax1, color='deepskyblue')
         ax1.set_title("Distribution of CO2 Emissions")
         ax1.set_ylabel('Frequency')
         st.pyplot(fig1)
@@ -118,7 +118,7 @@ elif page == "Data Visualization":
         st.subheader("Scatter Plot")
         col_x = st.selectbox("Select X-axis variable", df_numeric.columns.drop("CO2 Emissions(g/km)"), index=0)
         fig2, ax2 = plt.subplots()
-        sns.scatterplot(data=df, x=col_x, y="CO2 Emissions(g/km)", ax=ax2, color='magenta')
+        sns.scatterplot(data=df, x=col_x, y="CO2 Emissions(g/km)", ax=ax2, color='deepskyblue')
         ax2.set_title(f'{col_x} vs. CO2 Emissions')
         st.pyplot(fig2)
     with tab3:

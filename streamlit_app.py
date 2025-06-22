@@ -62,6 +62,32 @@ if page == "Introduction":
     rows = st.slider("Select a number of rows to display",5,20,5)
     st.dataframe(df.head(rows))
 
+    st.markdown("""
+    #### Abbreviations used in Dataset:
+    - *Model*
+    4WD/4X4 = Four-wheel drive
+    AWD = All-wheel drive
+    FFV = Flexible-fuel vehicle
+    SWB = Short wheelbase
+    LWB = Long wheelbase
+    EWB = Extended wheelbase
+
+    - *Transmission*
+    A = Automatic
+    AM = Automated manual
+    AS = Automatic with select shift
+    AV = Continuously variable
+    M = Manual
+    3 - 10 = Number of gears
+
+    - *Fuel type*
+    X = Regular gasoline
+    Z = Premium gasoline
+    D = Diesel
+    E = Ethanol (E85)
+    N = Natural gas
+    """)
+    
     st.markdown("#####  Summary Statistics")
     if st.button("Show Describe Table"):
         st.dataframe(df.describe())

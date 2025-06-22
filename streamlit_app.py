@@ -43,7 +43,7 @@ for element in list_non_num:
     
 
 st.sidebar.title("CO2 Emissions Predictor")
-page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions", "Explainability", "MLflow Runs"])
+page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions", "Explainability", "MLflow Runs", "Pycaret"])
 
 if page == "Introduction":
     st.title("CO2 Emissions Predictor")
@@ -243,5 +243,50 @@ elif page == "MLflow Runs":
     st.markdown(
         "View detailed runs on DagsHub: [oliviaosterlund/finalprojectapp MLflow](https://dagshub.com/oliviaosterlund/finalprojectapp.mlflow)"
     )
+elif page == "Pycaret":
+    st.subheader("PyCaret Regression")
+    target = st.sidebar.selectbox("Select a target variable",df2.columns)
+    features = st.multiselect("Select features",[c for c in df2.columns if c != target],default=[c for c in df2.columns if c != target] )
 
+    if not features:
+        st.warning("Please select at least one feature")
+        st.stop()
+
+    if st.button("Train & Evaluate"):
+        model_df = df2[features+[target]]
+        st.dataframe(model_df.head())
+    
+        with st.spinner("Training ..."):
+            reg_setup(data=model_df,target=target,session_id=42,html=False)
+            best = reg_compare(sort="R2",n_select=1)
+            model = reg_finalize(best)
+            comparison_df =reg_pull()
+    
+        st.success("Training Complete!")
+
+
+        st.subheader("Model Comparison")
+        st.dataframe(comparison_df)
+    
+    
+        with st.spinner("Evaluating ... "):
+            pred_df = reg_predict(model,model_df)
+            actual = pred_df[target]
+            predicted = pred_df["Label"] if "Label" in pred_df.columns else pred_df.iloc[:, -1]
+    
+            metrics= {}
+    
+            metrics["R2"] = r2_score(actual,predicted)
+            metrics["MAE"] = mean_absolute_error(actual,predicted) 
+    
+        st.success("Evaluation Done!")
+
+        st.subheader("Metrics")
+    
+        cols = st.columns(len(metrics))
+        for i, (name,val) in enumerate(metrics.items()):
+            cols[i].metric(name, f"{val:4f}")
+        
+        st.subheader("Predictions")
+        st.dataframe(pred_df.head(10))
 

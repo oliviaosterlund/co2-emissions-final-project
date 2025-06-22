@@ -232,15 +232,19 @@ elif page == "Explainability":
     explainer = shap.Explainer(model_exp)
     shap_values = explainer(X_shap)
 
-    # SHAP Waterfall Plot for first prediction
-    st.markdown("### SHAP Waterfall Plot")
-    shap.plots.waterfall(shap_values[37], show=False)
-    st.pyplot(plt.gcf())
-
-    # SHAP Beeswarm Plot
-    st.markdown("### SHAP Beeswarm Plot (Global Feature Importance)")
-    shap.summary_plot(shap_values.values, X_shap, plot_type="dot", show=False)
-    st.pyplot(plt.gcf())
+    tab1, tab2 = st.tabs(["Waterfall Plot", "Beeswarm Plot"])
+    with tab1:
+        # SHAP Waterfall Plot for first prediction
+        st.markdown("### SHAP Waterfall Plot")
+        shap.plots.waterfall(shap_values[37], show=False)
+        st.pyplot(plt.gcf())
+        plt.clf()
+    with tab2:
+        # SHAP Beeswarm Plot
+        st.markdown("### SHAP Beeswarm Plot (Global Feature Importance)")
+        shap.summary_plot(shap_values.values, X_shap, plot_type="dot", show=False)
+        st.pyplot(plt.gcf())
+        plt.clf()
 
 
 elif page == "MLflow Runs":

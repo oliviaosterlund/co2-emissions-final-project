@@ -107,9 +107,10 @@ elif page == "Data Visualization":
     st.subheader("Data Viz")
 
     diverging_cmap = sns.diverging_palette(
-    h_neg=197,  # DeepSkyBlue hue angle
-    h_pos=328,  # DeepPink hue angle
-    s=75, l=50,  # saturation and lightness
+    h_neg=210,  # Close to DeepSkyBlue in seaborn's HUSL
+    h_pos=340,  # Close to DeepPink
+    s=75,
+    l=60,
     as_cmap=True
     )
 

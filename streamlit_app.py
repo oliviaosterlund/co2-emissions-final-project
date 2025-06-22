@@ -256,16 +256,17 @@ elif page == "MLflow Runs":
     )
 elif page == "PyCaret":
     st.subheader("PyCaret Regression")
-    
-    target = st.sidebar.selectbox("Select a target variable",df2.columns)
-    features = st.multiselect("Select features",[c for c in df2.columns if c != target],default=[c for c in df2.columns if c != target] )
+
+    df3 = df2.sample(1000)
+    target = st.sidebar.selectbox("Select a target variable",df3.columns)
+    features = st.multiselect("Select features",[c for c in df3.columns if c != target],default=[c for c in df3.columns if c != target] )
 
     if not features:
         st.warning("Please select at least one feature")
         st.stop()
 
     if st.button("Train & Evaluate"):
-        model_df = df2[features+[target]]
+        model_df = df3[features+[target]]
         st.dataframe(model_df.head())
     
         with st.spinner("Training ..."):

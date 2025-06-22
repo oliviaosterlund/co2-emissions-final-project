@@ -127,7 +127,7 @@ elif page == "Data Visualization":
     with tab4:
         st.subheader("Correlation Matrix")
         fig_corr, ax_corr = plt.subplots(figsize=(18,14))
-        sns.heatmap(df_numeric.corr(),annot=True,fmt=".2f",cmap='RdBu')
+        sns.heatmap(df_numeric.corr(),annot=True,fmt=".2f",cmap='PiYG')
         st.pyplot(fig_corr)
 
 elif page == "Automated Report":

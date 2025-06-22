@@ -43,7 +43,7 @@ for element in list_non_num:
     
 
 st.sidebar.title("CO2 Emissions Predictor")
-page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions", "Explainability"])
+page = st.sidebar.selectbox("Select Page",["Introduction","Data Visualization", "Automated Report","Predictions", "Explainability", MLFlow Runs])
 
 if page == "Introduction":
     st.title("CO2 Emissions Predictor")
@@ -236,3 +236,12 @@ elif page == "Explainability":
     st.markdown("### SHAP Scatter Plot for 'Engine Size(L)'")
     shap.plots.scatter(shap_values[:, "Engine Size(L)"], color=shap_values, show=False)
     st.pyplot(plt.gcf())
+elif page == "MLflow Runs":
+    st.subheader("MLflow Runs")
+    runs = mlflow.search_runs(order_by=["start_time desc"])
+    st.dataframe(runs)
+    st.markdown(
+        "View detailed runs on DagsHub: [oliviaosterlund/finalprojectapp MLflow](https://dagshub.com/oliviaosterlund/finalprojectapp.mlflow)"
+    )
+
+

@@ -120,7 +120,7 @@ elif page == "Data Visualization":
         cat_col = st.selectbox("Select a X-axis variable",["Make","Vehicle Class","Transmission","Fuel Type"])
         avg_emissions = df.groupby(cat_col)["CO2 Emissions(g/km)"].mean().sort_values(ascending=False)
         fig4, ax4 = plt.subplots()
-        sns.barplot(x=avg_emissions.values, y=avg_emissions.index, ax=ax4, palette="RdPu")
+        sns.barplot(x=avg_emissions.values, y=avg_emissions.index, ax=ax4, palette="cool")
         ax4.set_xlabel("Average CO2 Emissions (g/km)")
         ax4.set_title(f"Average CO2 Emissions by {cat_col}")
         st.pyplot(fig4)

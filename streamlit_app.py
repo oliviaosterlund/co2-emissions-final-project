@@ -61,16 +61,20 @@ elif page == "Data Visualization":
 
     df_numeric = df.select_dtypes(include=np.number)
 
-    tab1, tab2, tab3 = st.tabs(["Histogram Plot", "Scatter Plot", "Correlation Heatmap"])
+    tab1, tab2, tab3 = st.tabs(["Histogram", "Scatter Plot", "Correlation Heatmap"])
     with tab1:
-        st.subheader("Histogram Plot")
-        sns.histplot(df, x='CO2 Emissions(g/km)', binwidth=14)
-        plt.title("Distribution of CO2 Emissions")
-        plt.ylabel('Frequency')
+        st.subheader("Histogram")
+        fig1, ax1 = plt.subplots()
+        sns.histplot(df, x='CO2 Emissions(g/km)', binwidth=14, ax=ax1)
+        ax1.set_title("Distribution of CO2 Emissions")
+        ax1.set_ylabel('Frequency')
+        st.pyplot(fig1)
     with tab2:
         st.subheader("Scatter Plot")
-        sns.scatterplot(data = df, x = "Engine Size(L)", y = "CO2 Emissions(g/km)")
-        plt.title('Engine Size vs. CO2 Emissions')
+        fig2, ax2 = plt.subplots()
+        sns.scatterplot(data=df, x="Engine Size(L)", y="CO2 Emissions(g/km)", ax=ax2)
+        ax2.set_title('Engine Size vs. CO2 Emissions')
+        st.pyplot(fig2)
     with tab3:
         st.subheader("Correlation Matrix")
         fig_corr, ax_corr = plt.subplots(figsize=(18,14))

@@ -71,9 +71,10 @@ elif page == "Data Visualization":
         st.pyplot(fig1)
     with tab2:
         st.subheader("Scatter Plot")
+        col_x = st.selectbox("Select X-axis variable", df_numeric.columns, index=0)
         fig2, ax2 = plt.subplots()
-        sns.scatterplot(data=df, x="Engine Size(L)", y="CO2 Emissions(g/km)", ax=ax2)
-        ax2.set_title('Engine Size vs. CO2 Emissions')
+        sns.scatterplot(data=df, x=col_x, y="CO2 Emissions(g/km)", ax=ax2)
+        ax2.set_title(f'{col_x} vs. CO2 Emissions')
         st.pyplot(fig2)
     with tab3:
         st.subheader("Correlation Matrix")

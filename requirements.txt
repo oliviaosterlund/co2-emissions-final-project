@@ -1,1 +1,12 @@
 streamlit
+seaborn
+pandas
+matplotlib
+scikit-learn
+numpy<=2.1.0
+ydata-profiling==4.12.2
+streamlit-pandas-profiling
+mlflow
+shap
+dagshub
+pycaretstreamlit

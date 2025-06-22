@@ -124,7 +124,7 @@ elif page == "Data Visualization":
         ax4.set_xlabel("Average CO2 Emissions (g/km)")
         ax4.set_title(f"Average CO2 Emissions by {cat_col}")
         st.pyplot(fig4)
-    with tab3:
+    with tab4:
         st.subheader("Correlation Matrix")
         fig_corr, ax_corr = plt.subplots(figsize=(18,14))
         sns.heatmap(df_numeric.corr(),annot=True,fmt=".2f",cmap='cool')

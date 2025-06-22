@@ -104,7 +104,7 @@ elif page == "Data Visualization":
     with tab1:
         st.subheader("Histogram")
         fig1, ax1 = plt.subplots()
-        sns.histplot(df, x='CO2 Emissions(g/km)', binwidth=14, ax=ax1, color='magenta')
+        sns.histplot(df, x='CO2 Emissions(g/km)', binwidth=14, ax=ax1, color='cyan')
         ax1.set_title("Distribution of CO2 Emissions")
         ax1.set_ylabel('Frequency')
         st.pyplot(fig1)

@@ -2,11 +2,12 @@ streamlit
 seaborn
 pandas
 matplotlib
-scikit-learn
+scikit-learn====1.4.2
 numpy<=2.1.0
 ydata-profiling==4.12.2
 streamlit-pandas-profiling
 mlflow
 shap
 dagshub
-pycaret
+imbalanced-learn==0.13.0 
+pycaret==3.3.2

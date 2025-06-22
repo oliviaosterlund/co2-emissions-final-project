@@ -223,7 +223,7 @@ elif page == "Predictions":
 elif page == "Explainability":
     st.subheader("Explainability")
     # Load dataset
-    X_shap, y_shap = df_numeric.drop(columns=["CO2 Emissions(g/km)"]), df_numeric["CO2 Emissions(g/km)"]
+    X_shap, y_shap = df2.drop(columns=["CO2 Emissions(g/km)"]), df2["CO2 Emissions(g/km)"]
     # Train default XGBoost model for explainability
     model_exp = XGBRegressor(objective='reg:squarederror', n_estimators=100, random_state=42)
     model_exp.fit(X_shap, y_shap)

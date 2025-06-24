@@ -239,7 +239,7 @@ elif page == "Explainability":
     explainer = shap.Explainer(model_exp)
     shap_values = explainer(X_shap)
 
-    tab1, tab2 = st.tabs(["Waterfall Plot", "Beeswarm Plot"])
+    tab1, tab2, tab3 = st.tabs(["Waterfall Plot", "Beeswarm Plot", "Scatter Plot"])
     with tab1:
         # SHAP Waterfall Plot for first prediction
         st.markdown(f"### SHAP Waterfall Plot for an Individual Prediction (Local Feature Importance)")
@@ -252,7 +252,11 @@ elif page == "Explainability":
         shap.summary_plot(shap_values.values, X_shap, plot_type="dot", show=False)
         st.pyplot(plt.gcf())
         plt.clf()
-
+    with tab3: 
+        # SHAP Scatter Plot for 'Fuel Consumption Comb (mpg)'
+        st.markdown("### SHAP Scatter Plot for 'Fuel Consumption Comb (mpg)'")
+        shap.plots.scatter(shap_values[:, "Fuel Consumption Comb (mpg)"], color=shap_values, show=False)
+        st.pyplot(plt.gcf())
 
 elif page == "MLflow Runs":
     st.subheader("MLflow Runs")

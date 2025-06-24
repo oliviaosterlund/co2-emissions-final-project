@@ -243,7 +243,13 @@ elif page == "Explainability":
     with tab1:
         # SHAP Waterfall Plot for first prediction
         st.markdown(f"### SHAP Waterfall Plot for an Individual Prediction (Local Feature Importance)")
-        shap.plots.waterfall(shap_values[18], show=False)
+        idx = st.slider(
+        "Select prediction index",
+        min_value=1,
+        max_value=37,
+        value=1  # default to row 1
+        )
+        shap.plots.waterfall(shap_values[idx], show=False)
         st.pyplot(plt.gcf())
         plt.clf()
     with tab2:

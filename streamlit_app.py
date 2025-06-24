@@ -254,7 +254,7 @@ elif page == "Explainability":
         plt.clf()
     with tab3: 
         # SHAP Scatter Plot for 'Fuel Consumption Comb (L/100 km)'
-        st.markdown("### SHAP Scatter Plot for 'Fuel Consumption Comb (L/100 km)'")
+        st.markdown("### SHAP Scatter Plot for Fuel Consumption Comb (L/100 km)")
         shap.plots.scatter(shap_values[:, "Fuel Consumption Comb (L/100 km)"], color=shap_values, show=False)
         st.pyplot(plt.gcf())
 

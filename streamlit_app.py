@@ -132,9 +132,6 @@ elif page == "Data Visualization":
         st.pyplot(fig4)
     with tab4:
         st.subheader("Correlation Matrix")
-        fig_corr, ax_corr = plt.subplots(figsize=(18,14))
-        sns.heatmap(df_numeric.corr(),annot=True,fmt=".2f",cmap='cool')
-        st.pyplot(fig_corr)
         st.markdown("#####  Note about the two different fuel consumption combined variables:")
         st.markdown("""
     - Combined MPG measures fuel economy: miles driven per gallon.
@@ -142,6 +139,9 @@ elif page == "Data Visualization":
     - Fuel consumption (L/100 km) measures fuel consumption: liters used per 100 km.
         - More liters per 100 km → worse efficiency → correlates positively with engine size, emissions, etc.
         """)
+        fig_corr, ax_corr = plt.subplots(figsize=(18,14))
+        sns.heatmap(df_numeric.corr(),annot=True,fmt=".2f",cmap='cool')
+        st.pyplot(fig_corr)
 
 elif page == "Automated Report":
     st.subheader("Automated Report")

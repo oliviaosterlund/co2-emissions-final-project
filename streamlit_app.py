@@ -253,9 +253,9 @@ elif page == "Explainability":
         st.pyplot(plt.gcf())
         plt.clf()
     with tab3: 
-        # SHAP Scatter Plot for 'Fuel Consumption Comb (mpg)'
-        st.markdown("### SHAP Scatter Plot for 'Fuel Consumption Comb (mpg)'")
-        shap.plots.scatter(shap_values[:, "Fuel Consumption Comb (mpg)"], color=shap_values, show=False)
+        # SHAP Scatter Plot for 'Fuel Consumption Comb (L/100 km)'
+        st.markdown("### SHAP Scatter Plot for 'Fuel Consumption Comb (L/100 km)'")
+        shap.plots.scatter(shap_values[:, "Fuel Consumption Comb (L/100 km)"], color=shap_values, show=False)
         st.pyplot(plt.gcf())
 
 elif page == "MLflow Runs":

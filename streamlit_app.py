@@ -56,7 +56,7 @@ if page == "Introduction":
     st.subheader("Analyzing the features of vehicles on CO2 emissions")
     st.markdown("""
     #### What this app does:
-    - *Analyzes* key features
+    - *Analyzes* key features of vehicles and how they relate to each other 
     - *Visualizes* trends and provides actionable insights into what features are the most impactful
     - *Predicts* CO2 emissions using a variety of regression models
     """)
